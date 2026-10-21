@@ -1,0 +1,7 @@
+# 插入 t/s 读数插件（dsh-tps）。
+# 本插件自带完整链路：agent/assistant-stream + session/event → tracker → 状态端点、
+# 浮窗脚本，并同时提供结构化注入行与 tapIndex 两条注入路径。
+- insert:
+    - id: dsh-tps
+      name: dsh-tps
+      config: {}

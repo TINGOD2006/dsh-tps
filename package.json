@@ -1,0 +1,50 @@
+{
+  "name": "dsh-tps",
+  "version": "2.1.0",
+  "description": "Live tokens-per-second readout card for the current DeepSeek Harness session, docked to the sidebar or draggable as a floating card.",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "tokens-per-second",
+    "throughput",
+    "usage",
+    "monitor",
+    "meter"
+  ],
+  "license": "MIT",
+  "author": "TINGOD2006",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TINGOD2006/dsh-tps.git"
+  },
+  "homepage": "https://github.com/TINGOD2006/dsh-tps#readme",
+  "bugs": {
+    "url": "https://github.com/TINGOD2006/dsh-tps/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node lib/tracker.test.js"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
