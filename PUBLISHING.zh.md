@@ -1,4 +1,4 @@
-# 发布 / 收录流程（dsh-tps）
+﻿# 发布 / 收录流程（dsh-tps）
 
 与 `dsh-scratch-vault` 的发布方式一致，共三步。第 1 步是必须的，第 2、3 步是可选/收录。
 
@@ -30,15 +30,23 @@ git push origin main
 
 有 npm 包，市场才会显示下载量并优先展示预构建安装；没有 npm 包照样能装，只是没有下载数字。
 
-- 首次发布需要在 npmjs.com 给包配置 **Trusted Publisher**：
-  Owner `TINGOD2006`、Repo `dsh-tps`、Workflow `publish.yml`。
-- 配置后，推 `v*` tag 即由 `.github/workflows/publish.yml` 用 OIDC 发布，仓库里不放任何 token：
+- 首次发布前，在**自己的终端**（需要一次交互式 2FA，沙箱里做不了）建立信任关系，
+  或在 npmjs.com 包设置里点出来：
+
+```sh
+npm trust github dsh-tps --file publish.yml --repo TINGOD2006/dsh-tps --allow-publish -y
+```
+
+- 之后每个版本：改 `package.json` 的 `version` → 打 tag → 推送，CI 用 OIDC 直接发，仓库里不放任何 token：
 
 ```sh
 git tag v2.1.0
 git push origin v2.1.0
 ```
 
+- 首次发布时 npm 会先建一个公开的占位版本 `0.0.0-stage`，真正的 `2.1.0` 随后由同一支
+  workflow 发布，`latest` 指向正式版；占位版无内容，可忽略。
+- 用 OIDC 发布时会自动附带 provenance（`https://registry.npmjs.org/-/npm/v1/attestations/dsh-tps@<version>`）。
 - `package.json` 的 `repository` 必须指回 GitHub 仓库，否则市场不会把包和条目关联起来。
 
 ## 3. 收录进 DSH 插件市场（awesome-dsh-plugin）
@@ -66,7 +74,7 @@ description:
 - 插件是纯前端读数：无网络请求、无运行时依赖，数据全部来自本地会话事件。
 - `lib/widget.js` 每次请求从磁盘读取，改完刷新页面即生效；页面还在跑旧版会显示 `⟳`。
 
-## 当前进度（2026-10-21）
+## 当前进度（2026-10-22）
 
 - ✅ GitHub：已建仓 `TINGOD2006/dsh-tps`（public），main 已推送，主题含 `dsh-plugin`、
   `deepseek-harness`、`dsh`、`tokens-per-second`。
@@ -81,6 +89,9 @@ gh pr create --repo awesome-dsh-plugin/awesome-dsh-plugin \
   --body "Live tokens-per-second card for DeepSeek Harness sessions — docked to the sidebar or draggable as a floating card."
 ```
 
-- ⬜ npm：`package.json`、`publish.yml` 已就绪；先在 npmjs.com 给包配置 Trusted Publisher
-  （Owner `TINGOD2006` / Repo `dsh-tps` / Workflow `publish.yml`），再 `git push origin v2.1.0`。
+- ✅ npm：Trusted Publisher（`publish.yml`，OIDC）已配置，`v2.1.0` tag 触发
+  [Actions 发布](https://github.com/TINGOD2006/dsh-tps/actions) 成功，
+  [`dsh-tps@2.1.0`](https://www.npmjs.com/package/dsh-tps) 已上架（9 个文件、89 kB、
+  带 provenance）。首发的 `0.0.0-stage` 是 npm 的占位版，正常。
+- ⏳ 市场：PR 仍等「仓库创建满 1 天」门槛（2026-10-22 之后），命令见上。
 
