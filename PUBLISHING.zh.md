@@ -65,3 +65,22 @@ description:
 
 - 插件是纯前端读数：无网络请求、无运行时依赖，数据全部来自本地会话事件。
 - `lib/widget.js` 每次请求从磁盘读取，改完刷新页面即生效；页面还在跑旧版会显示 `⟳`。
+
+## 当前进度（2026-10-21）
+
+- ✅ GitHub：已建仓 `TINGOD2006/dsh-tps`（public），main 已推送，主题含 `dsh-plugin`、
+  `deepseek-harness`、`dsh`、`tokens-per-second`。
+- ⏳ 市场：fork `TINGOD2006/awesome-dsh-plugin` 已建，分支 `add-dsh-tps` 上已提交
+  `data/plugins/TINGOD2006__dsh-tps.yml`（单文件、与 main 比对只有这一处改动）。
+  **受「仓库创建满 1 天」的 CI 门槛约束**，需等 2026-10-22 之后再开 PR：
+
+```sh
+gh pr create --repo awesome-dsh-plugin/awesome-dsh-plugin \
+  --head TINGOD2006:add-dsh-tps \
+  --title "Add dsh-tps" \
+  --body "Live tokens-per-second card for DeepSeek Harness sessions — docked to the sidebar or draggable as a floating card."
+```
+
+- ⬜ npm：`package.json`、`publish.yml` 已就绪；先在 npmjs.com 给包配置 Trusted Publisher
+  （Owner `TINGOD2006` / Repo `dsh-tps` / Workflow `publish.yml`），再 `git push origin v2.1.0`。
+
