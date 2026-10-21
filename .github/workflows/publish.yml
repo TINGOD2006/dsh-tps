@@ -28,7 +28,10 @@ jobs:
       - name: Toolchain
         run: node --version && npm --version
 
-      # 純 Node、零依賴，不需要 npm ci / 建置；直接跑測試。
+      # Trusted Publishing 需要 npm >= 11.5.1，不賭 runner 內建的版本。
+      - name: Upgrade npm
+        run: npm install -g npm@^11
+
       - name: Test
         run: npm test
 
