@@ -1,4 +1,4 @@
-﻿# 发布 / 收录流程（dsh-tps）
+# 发布 / 收录流程（dsh-tps）
 
 与 `dsh-scratch-vault` 的发布方式一致，共三步。第 1 步是必须的，第 2、3 步是可选/收录。
 
@@ -78,20 +78,15 @@ description:
 
 - ✅ GitHub：已建仓 `TINGOD2006/dsh-tps`（public），main 已推送，主题含 `dsh-plugin`、
   `deepseek-harness`、`dsh`、`tokens-per-second`。
-- ⏳ 市场：fork `TINGOD2006/awesome-dsh-plugin` 已建，分支 `add-dsh-tps` 上已提交
-  `data/plugins/TINGOD2006__dsh-tps.yml`（单文件、与 main 比对只有这一处改动）。
-  **受「仓库创建满 1 天」的 CI 门槛约束**，需等 2026-10-22 之后再开 PR：
-
-```sh
-gh pr create --repo awesome-dsh-plugin/awesome-dsh-plugin \
-  --head TINGOD2006:add-dsh-tps \
-  --title "Add dsh-tps" \
-  --body "Live tokens-per-second card for DeepSeek Harness sessions — docked to the sidebar or draggable as a floating card."
-```
-
+- ⏳ 市场：已开 PR [#8626](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/8626)
+  （标题 `Add TINGOD2006/dsh-tps`，单文件 `data/plugins/TINGOD2006__dsh-tps.yml`，
+  与 fork 的 `main` 比对只有这一处改动）。
+  - `PR check` 已绿（7m27s：.yml 命名、目录、README 重生成、awesome-lint、站点构建全过）。
+  - `Submission gate` 会先报仓库年龄：仓库建于 `2026-10-21T12:20:13Z`，满 1 天是
+    `2026-10-22T12:20Z`。gate 自己每 6 小时按「days old」重跑（`regate.yml`），
+    **不需要重提、不需要 push、不需要关掉重开**，红了会自己转绿。
 - ✅ npm：Trusted Publisher（`publish.yml`，OIDC）已配置，`v2.1.0` tag 触发
   [Actions 发布](https://github.com/TINGOD2006/dsh-tps/actions) 成功，
   [`dsh-tps@2.1.0`](https://www.npmjs.com/package/dsh-tps) 已上架（9 个文件、89 kB、
   带 provenance）。首发的 `0.0.0-stage` 是 npm 的占位版，正常。
-- ⏳ 市场：PR 仍等「仓库创建满 1 天」门槛（2026-10-22 之后），命令见上。
 
