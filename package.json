@@ -40,7 +40,7 @@
     "access": "public"
   },
   "scripts": {
-    "test": "node lib/tracker.test.js"
+    "test": "node --test lib/*.test.js"
   },
   "dsh": {
     "bundle": {

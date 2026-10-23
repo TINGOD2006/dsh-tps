@@ -12,6 +12,9 @@ toggle at the card's top-right corner.
 - **Average t/s** — session-wide average since the first token; toggle 实时 /
   平均 (live / average) with the segmented control in the card header.
 - **Sparkline** — the last 40 samples, drawn with the card's own accent colour.
+- **Current task name** — left-aligned above the speed, following the card's
+  selected session and remaining visible when collapsed. Long names use an
+  ellipsis with the full name on hover; untitled sessions show their short ID.
 - **Session list** — every session with a reading, titled and followed by the
   workspace it lives in, e.g. `dsh-tps (dsh-tps)`. Click a row to switch the card
   to that session; the click does not touch your current page.
@@ -59,15 +62,23 @@ is loaded). No build step, no dependencies.
   reloading the page is enough — no restart. A `⟳` hint appears when the page is
   still running an older copy of the widget than the one on disk.
 
+Chunks arriving in the same millisecond share one sample, retaining their full
+token count during bursts. The event stream also sweeps expired trackers at most
+once a minute, even without an open widget. State and update-check requests time
+out after 5 seconds, including response-body reads; polling then retries normally
+and slows to a 5-second interval after three consecutive failures.
+
 ## Tests
 
 ```sh
-node lib/tracker.test.js
+npm test
 ```
 
 Covers the window denominator floor, idle decay, in-flight step readings,
-block-end fallback and cache-hit accounting — all with injected timestamps, no
-real clock, no network, no fixtures.
+block-end fallback, cache-hit accounting, burst aggregation and tracker cleanup.
+Widget tests run the injected script with a lightweight DOM and a virtual clock
+to verify timeout recovery, failure backoff, visibility changes and update checks.
+No real waiting, network or external dependencies are needed.
 
 ## License
 
