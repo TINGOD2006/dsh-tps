@@ -11,6 +11,10 @@ toggle at the card's top-right corner.
   bursty chunks cannot spike the number).
 - **Average t/s** — session-wide average since the first token; toggle 实时 /
   平均 (live / average) with the segmented control in the card header.
+- **Buffered-stream fallback** — some providers (e.g. the UM reverse proxy) deliver
+  the whole reply in one burst, so no live decode window exists. The live slot then
+  shows the last step's **step-wide average** (including first-token wait), marked
+  “整步计速” in the tooltip, instead of sitting at 0.0.
 - **Sparkline** — the last 40 samples, drawn with the card's own accent colour.
 - **Current task name** — left-aligned above the speed, following the card's
   selected session and remaining visible when collapsed. Long names use an
