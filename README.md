@@ -4,6 +4,12 @@ A live **tokens-per-second** card for the current DeepSeek Harness session. It
 docks into the left sidebar, or floats as a draggable card — switch with the
 toggle at the card's top-right corner.
 
+![Docked to the sidebar in live mode](assets/screenshot-1.jpg)
+
+| Average mode | Floating card |
+| --- | --- |
+| ![Average mode](assets/screenshot-2.jpg) | ![Floating card](assets/screenshot-3.jpg) |
+
 ## What it shows
 
 - **Live t/s** — throughput of the streaming assistant output, computed from real

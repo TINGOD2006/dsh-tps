@@ -3,6 +3,12 @@
 当前会话的**实时 tokens/s 读数卡片**。既可以停靠到左侧栏，也可以作为悬浮卡片拖动
 ——用卡片右上角的两个按钮切换。
 
+![停靠在左侧栏的实时读数](assets/screenshot-1.jpg)
+
+| 均速模式 | 悬浮卡片 |
+| --- | --- |
+| ![均速模式](assets/screenshot-2.jpg) | ![悬浮卡片](assets/screenshot-3.jpg) |
+
 ## 显示什么
 
 - **实时 t/s**：流式输出速度，来自真实的 `agent/assistant-stream` 增量（滑动窗口，
