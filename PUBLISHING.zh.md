@@ -69,24 +69,41 @@ description:
   （CI 自动检查，刚建好的仓库当天提交必被挡下，隔天重提即可）、描述属实不带营销词。
 - CI 依次检查：条目数 ≤3、`dsh.bundle`、仓库年龄、awesome-lint 与站点构建。
 
+## 4. 店铺素材（图标 / 截图）
+
+市场详情页的图标与截图都放在**本仓库**，截图不用再往 awesome-dsh-plugin 提 PR：
+
+- **截图**：仓库根的 `screenshots.json`，形如 `{"screenshots":["assets/screenshot-1.jpg", ...]}`。
+  1-8 张、路径相对该文件、不能以 `/` 开头、不能含 `..`。nightly 构建自动抓，
+  推自己的仓库即生效，下一次构建就有。
+- **图标**：市场条目的 `icon:` 字段，必须指向 GitHub 托管的位图（本仓库用
+  `https://raw.githubusercontent.com/TINGOD2006/dsh-tps/main/assets/icon-180.png`）。
+  改这一行要往 awesome-dsh-plugin 提 PR（单文件改动，`data/plugins/TINGOD2006__dsh-tps.yml`）。
+- 素材本体在 `assets/`，已加进 `package.json` 的 `files`，npm 包也带着；
+  `screenshots.json` 刻意**不**进 `files`——市场只读仓库根文件，npm 包不需要它。
+- README 里的截图用**绝对 raw URL**：相对路径在 awesome 详情页会被解析成绝对地址，
+  但 npm 的 README 渲染不解析相对路径，会显示成断图。
+
 ## 备注
 
 - 插件是纯前端读数：无网络请求、无运行时依赖，数据全部来自本地会话事件。
 - `lib/widget.js` 每次请求从磁盘读取，改完刷新页面即生效；页面还在跑旧版会显示 `⟳`。
 
-## 当前进度（2026-10-22）
+## 当前进度（2026-11-04）
 
-- ✅ GitHub：已建仓 `TINGOD2006/dsh-tps`（public），main 已推送，主题含 `dsh-plugin`、
+- ✅ GitHub：仓库 `TINGOD2006/dsh-tps`（public），main 已推送，主题含 `dsh-plugin`、
   `deepseek-harness`、`dsh`、`tokens-per-second`。
-- ⏳ 市场：已开 PR [#8626](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/8626)
-  （标题 `Add TINGOD2006/dsh-tps`，单文件 `data/plugins/TINGOD2006__dsh-tps.yml`，
-  与 fork 的 `main` 比对只有这一处改动）。
-  - `PR check` 已绿（7m27s：.yml 命名、目录、README 重生成、awesome-lint、站点构建全过）。
-  - `Submission gate` 会先报仓库年龄：仓库建于 `2026-10-21T12:20:13Z`，满 1 天是
-    `2026-10-22T12:20Z`。gate 自己每 6 小时按「days old」重跑（`regate.yml`），
-    **不需要重提、不需要 push、不需要关掉重开**，红了会自己转绿。
-- ✅ npm：Trusted Publisher（`publish.yml`，OIDC）已配置，`v2.1.0` tag 触发
+- ✅ 市场收录：PR [#8626](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/8626)
+  **已于 2026-10-23 合并**，条目 `data/plugins/TINGOD2006__dsh-tps.yml` 在 awesome-dsh-plugin、
+  awesome-dsh-plugin.com/plugins.json、dshmarket.com、dsh-plugin-catalog（npm）、dsh.works、
+  dsh.so 六个目录里都能搜到。
+- ✅ 店铺素材：图标由 PR [#11732](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/11732)
+  加进条目的 `icon:` 字段（同 11-03 合并）；4 张截图由本仓库的 `screenshots.json` 声明，
+  已出现在 registry 的 `screenshots` 字段里（`plugins.json` 每条都带）。
+- ⏳ 目录里的 `version` / `downloads` 字段比 npm 慢一拍（写 2.1.1、404 下载量），那是
+  nightly 探针的滞后，不是缺漏，下一次构建会自己更新——**不需要为它做任何事**。
+- ✅ npm：Trusted Publisher（`publish.yml`，OIDC）已配置，`v2.1.0` / `v2.1.2` tag 触发
   [Actions 发布](https://github.com/TINGOD2006/dsh-tps/actions) 成功，
-  [`dsh-tps@2.1.0`](https://www.npmjs.com/package/dsh-tps) 已上架（9 个文件、89 kB、
-  带 provenance）。首发的 `0.0.0-stage` 是 npm 的占位版，正常。
+  [`dsh-tps@2.1.2`](https://www.npmjs.com/package/dsh-tps) 已上架（15 个文件、535 kB、
+  带 provenance，含 `assets/` 的截图与图标）。首发的 `0.0.0-stage` 是 npm 的占位版，正常。
 
