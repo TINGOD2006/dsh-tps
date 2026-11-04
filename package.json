@@ -1,6 +1,6 @@
 {
   "name": "dsh-tps",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Live tokens-per-second readout card for the current DeepSeek Harness session, docked to the sidebar or draggable as a floating card.",
   "type": "module",
   "main": "./lib/index.js",
